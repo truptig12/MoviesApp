@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.kapt)
 }
 
 android {
@@ -33,6 +34,16 @@ android {
 }
 
 dependencies {
+
+    //=== Hilt ===
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation (libs.androidx.hilt.navigation.compose)
+
+    //=== paging ===
+    implementation(libs.androidx.paging.runtime)
+    testImplementation (libs.androidx.paging.common)
+    implementation (libs.androidx.paging.compose)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
