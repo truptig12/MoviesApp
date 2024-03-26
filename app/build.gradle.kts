@@ -51,6 +51,11 @@ android {
 
 dependencies {
 
+    implementation(project(":core"))
+    implementation(project(":movie_features:movie_data"))
+    implementation(project(":movie_features:movie_domain"))
+    implementation(project(":movie_features:movie_presentation"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
