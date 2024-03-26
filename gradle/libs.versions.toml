@@ -16,6 +16,7 @@ kaptVersion = "1.9.0"
 hilt_version = "2.48"
 hiltNavigationCompose = "1.2.0"
 paging="3.2.1"
+coil ="2.4.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -53,6 +54,9 @@ androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navig
 androidx-paging-runtime ={ group="androidx.paging", name ="paging-runtime", version.ref= "paging"}
 androidx-paging-common ={ group="androidx.paging", name ="paging-common", version.ref= "paging"}
 androidx-paging-compose ={ group="androidx.paging", name ="paging-compose", version.ref= "paging"}
+
+#coil
+coil-compose={group="io.coil-kt", name="coil-compose", version.ref="coil"}
 
 
 [plugins]

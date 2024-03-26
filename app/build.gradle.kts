@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.kapt)
+    alias(libs.plugins.hiltAndroid)
 }
 
 android {
@@ -55,6 +57,11 @@ dependencies {
     implementation(project(":movie_features:movie_data"))
     implementation(project(":movie_features:movie_domain"))
     implementation(project(":movie_features:movie_presentation"))
+
+    //=== Hilt ===
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation (libs.androidx.hilt.navigation.compose)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
