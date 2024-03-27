@@ -17,6 +17,10 @@ MoviesApp has list of movies, search feature, and view movie feature
 - Android Studio (latest version recommended).
 - An Android emulator or physical device running Android API level 21 (Lollipop) or higher.
 
+### Api used
+
+https://www.omdbapi.com/
+
 ### Installation
 
 1. Clone the repository to your local machine:
