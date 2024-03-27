@@ -22,14 +22,12 @@ class MoviePagingSource(
                 input = input,
                 pageNumber = currentPage
             )
-            Log.d("movies api", movies.Search?.size.toString())
             if (movies.Search?.size != null) {
                 dao.deleteMovies()
-                Log.d("movies api", movies.Search?.size.toString())
                 dao.insertMovies(movies.Search!!.filter { it.Year.toInt() > 2000 }
                     .sortedBy { it.Year }.map { it.toMovieEntity() })
                 if (dao.getAllMovies().isNullOrEmpty()) {
-                    LoadResult.Error(Exception("Something Went Wrong"))
+                    LoadResult.Error(Exception("No More Data"))
                 } else {
                     val newMovie = dao.getAllMovies().map { it.toMovie() }
                     LoadResult.Page(
@@ -39,7 +37,7 @@ class MoviePagingSource(
                     )
                 }
             } else {
-                LoadResult.Error(Exception("Something Went Wrong"))
+                LoadResult.Error(Exception("No More Data"))
             }
 
 

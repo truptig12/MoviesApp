@@ -25,6 +25,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -47,6 +48,7 @@ import com.truptig.movie_presentation.components.ErrorMessage
 import com.truptig.movie_presentation.components.ItemMovie
 import com.truptig.movie_presentation.components.LoadingNextPageItem
 import com.truptig.movie_presentation.components.PageLoader
+import com.truptig.movie_presentation.components.SearchField
 import com.truptig.movie_presentation.viewmodel.HomeEvent
 import com.truptig.movie_presentation.viewmodel.MovieViewModel
 
@@ -58,7 +60,7 @@ fun HomeScreen(
 
     val viewModel: MovieViewModel = hiltViewModel()
     val moviePagingItems: LazyPagingItems<Movie> = viewModel.moviesState.collectAsLazyPagingItems()
-    var searchText by rememberSaveable { mutableStateOf("") }
+    var searchText by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -81,29 +83,23 @@ fun HomeScreen(
         }
     ) {
         Column {
-            OutlinedTextField(
+            SearchField(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(it)
-                    .padding(start = 16.dp, top = 8.dp, end = 16.dp),
+                    .padding(start = 8.dp, top = 8.dp, end = 8.dp),
                 value = searchText,
                 onValueChange = {
                     searchText = it
                     viewModel.onEvent(HomeEvent.Search(searchText)) },
-                label = { Text("Search") },
-                textStyle = TextStyle(fontFamily = FontFamily.SansSerif, fontWeight = FontWeight.Bold),
-                keyboardOptions = KeyboardOptions.Default.copy(
-                    imeAction = ImeAction.Done
-                ),
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor= Color.White,
-                    unfocusedContainerColor = Color.White,
-                    focusedIndicatorColor = Color.Gray, // Change to your desired color
-                    unfocusedIndicatorColor = Color.Gray.copy(alpha = 0.2f ) // Op
-                ),
+                hint ="Search",
+                onClick = {
+                    searchText = ""
+                    viewModel.onEvent(HomeEvent.Search(""))
+                }
             )
             LazyVerticalGrid(
-                modifier = Modifier.padding(it).fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 columns = GridCells.Fixed(2),
                 contentPadding = PaddingValues(bottom = bottomPadding)
             ) {
