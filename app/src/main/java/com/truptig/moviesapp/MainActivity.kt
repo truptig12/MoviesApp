@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.truptig.movie_presentation.screens.HomeScreen
+import com.truptig.movie_presentation.screens.MovieScreen
 import com.truptig.movie_presentation.viewmodel.MovieViewModel
 import com.truptig.moviesapp.ui.theme.MoviesAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,11 +31,14 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
+                    val viewModel: MovieViewModel = hiltViewModel()
                     val navController = rememberNavController()
                     NavHost(navController = navController, startDestination = "home") {
                         composable("home") {
-                            HomeScreen(navController)
+                            HomeScreen(viewModel,navController)
+                        }
+                        composable("details") {
+                            MovieScreen(viewModel,navController)
                         }
                     }
                 }

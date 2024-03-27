@@ -38,6 +38,7 @@ dependencies {
 
     //=== Hilt ===
     implementation(libs.hilt.android)
+    implementation(project(":core"))
     kapt(libs.hilt.android.compiler)
     implementation (libs.androidx.hilt.navigation.compose)
 

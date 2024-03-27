@@ -8,33 +8,21 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -55,10 +43,11 @@ import com.truptig.movie_presentation.viewmodel.MovieViewModel
 
 @Composable
 fun HomeScreen(
+    viewModel: MovieViewModel,
     navController: NavHostController
 ) {
 
-    val viewModel: MovieViewModel = hiltViewModel()
+   // val viewModel: MovieViewModel = hiltViewModel()
     val moviePagingItems: LazyPagingItems<Movie> = viewModel.moviesState.collectAsLazyPagingItems()
     var searchText by remember { mutableStateOf("") }
 
@@ -82,11 +71,12 @@ fun HomeScreen(
             }
         }
     ) {
-        Column {
+        Column(modifier = Modifier
+            .fillMaxWidth()
+            .padding(it)) {
             SearchField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(it)
                     .padding(start = 8.dp, top = 8.dp, end = 8.dp),
                 value = searchText,
                 onValueChange = {
@@ -119,6 +109,8 @@ fun HomeScreen(
                                 }
                             }
                         )*/
+                            viewModel.onEvent(HomeEvent.Details(moviePagingItems[index]!!.Title))
+                            navController.navigate("details")
                         }
                     )
                 }
@@ -155,6 +147,57 @@ fun HomeScreen(
                 }
                 item { Spacer(modifier = Modifier.padding(4.dp)) }
             }
+
+           /* LazyColumn(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .background(Color(0xfff9f9f9))
+            ) {
+                item { Spacer(modifier = Modifier.padding(4.dp)) }
+                items(moviePagingItems.itemCount) { index ->
+                    ItemMovie(
+                        itemEntity = moviePagingItems[index]!!,
+                        onClick = {
+                            viewModel.onEvent(HomeEvent.Details(moviePagingItems[index]!!.Title))
+                            navController.navigate("details")
+
+                            //  navController.navigate("details/${moviePagingItems[index]!!.Title}")
+                        }
+                    )
+                }
+                moviePagingItems.apply {
+                    when {
+                        loadState.refresh is LoadState.Loading -> {
+                            item { PageLoader(modifier = Modifier.fillParentMaxSize()) }
+                        }
+
+                        loadState.refresh is LoadState.Error -> {
+                            val error = moviePagingItems.loadState.refresh as LoadState.Error
+                            item {
+                                ErrorMessage(
+                                    modifier = Modifier.fillParentMaxSize(),
+                                    message = error.error.localizedMessage!!,
+                                    onClickRetry = { retry() })
+                            }
+                        }
+
+                        loadState.append is LoadState.Loading -> {
+                            item { LoadingNextPageItem(modifier = Modifier) }
+                        }
+
+                        loadState.append is LoadState.Error -> {
+                            val error = moviePagingItems.loadState.append as LoadState.Error
+                            item {
+                                ErrorMessage(
+                                    modifier = Modifier,
+                                    message = error.error.localizedMessage!!,
+                                    onClickRetry = { retry() })
+                            }
+                        }
+                    }
+                }
+                item { Spacer(modifier = Modifier.padding(4.dp)) }
+            }*/
         }
     }
 }

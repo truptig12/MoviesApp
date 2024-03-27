@@ -1,4 +1,4 @@
-package com.truptig.core.ui
+package com.truptig.core.utils
 
 class MoviesConstants {
     companion object{

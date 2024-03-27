@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.truptig.movie_data.local.entity.MovieDetailsEntity
 import com.truptig.movie_data.local.entity.MovieEntity
 
 @Dao
@@ -17,4 +18,10 @@ interface MovieDao {
 
     @Query("SELECT * FROM movieentity ORDER BY year ASC")
     suspend fun getAllMovies(): List<MovieEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveMovieDetails(movieDetails: MovieDetailsEntity)
+
+    @Query("SELECT * FROM MovieDetailsEntity WHERE  Title= :id")
+    suspend fun getMovieDetailsById(id: String): MovieDetailsEntity
 }

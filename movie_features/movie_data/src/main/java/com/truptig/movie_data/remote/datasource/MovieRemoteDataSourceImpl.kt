@@ -1,6 +1,6 @@
 package com.truptig.movie_data.remote.datasource
 
-import com.truptig.core.ui.MoviesConstants
+import com.truptig.core.utils.MoviesConstants
 import com.truptig.movie_data.remote.MovieApi
 import com.truptig.movie_data.remote.dto.MovieDto
 import com.truptig.movie_data.remote.dto.SearchResultsDto
@@ -22,5 +22,7 @@ class MovieRemoteDataSourceImpl @Inject constructor(
             page = pageNumber
         )
     }
+
+
 
 }
