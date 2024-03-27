@@ -1,5 +1,6 @@
 package com.truptig.movie_data.remote.datasource
 
+import com.truptig.core.ui.MoviesConstants
 import com.truptig.movie_data.remote.MovieApi
 import com.truptig.movie_data.remote.dto.MovieDto
 import com.truptig.movie_data.remote.dto.SearchResultsDto
@@ -11,10 +12,15 @@ class MovieRemoteDataSourceImpl @Inject constructor(
 ) : MovieRemoteDataSource {
 
     override suspend fun getMovies(
-        apiKey: String,
+        input: String,
         pageNumber: Int
     ): SearchResultsDto<List<MovieDto>> {
-        return api.getAllMovies("love", apiKey = apiKey, page = pageNumber)
+        val searchString = if (input.isEmpty()) "Love" else input
+        return api.getAllMovies(
+            searchString,
+            apiKey = MoviesConstants.MOVIE_API_KEY,
+            page = pageNumber
+        )
     }
 
 }

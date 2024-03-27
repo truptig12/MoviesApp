@@ -15,11 +15,11 @@ class MovieRepositoryImpl(
     private val dao: MovieDao
 ) : MovieRepository {
 
-    override fun getMovie(): Flow<PagingData<Movie>> {
+    override fun getMovie(input : String): Flow<PagingData<Movie>> {
         return Pager(
             config = PagingConfig(pageSize = 10, prefetchDistance = 2),
             pagingSourceFactory = {
-                MoviePagingSource(MovieRemoteDataSourceImpl(api),dao)
+                MoviePagingSource(MovieRemoteDataSourceImpl(api),dao, input)
             }
         ).flow
     }

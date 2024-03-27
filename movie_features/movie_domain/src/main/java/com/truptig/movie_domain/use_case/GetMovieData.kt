@@ -10,8 +10,8 @@ import javax.inject.Inject
 
 class GetMovieData @Inject constructor(
     private val repository: MovieRepository
-) : BaseUseCase<Unit, Flow<PagingData<Movie>>> {
-    override suspend fun execute(input: Unit): Flow<PagingData<Movie>> {
-        return repository.getMovie()
+) : BaseUseCase<String, Flow<PagingData<Movie>>> {
+    override suspend fun execute(input: String): Flow<PagingData<Movie>> {
+        return repository.getMovie(input)
     }
 }

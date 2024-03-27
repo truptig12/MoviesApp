@@ -17,6 +17,12 @@ hilt_version = "2.48"
 hiltNavigationCompose = "1.2.0"
 paging="3.2.1"
 coil ="2.4.0"
+mockitoCore = "5.1.1"
+mockitoAndroid = "5.1.1"
+coroutinesTest = "1.8.0"
+coreTesting = "2.2.0"
+turbine = "0.7.0"
+mockk = "1.13.10"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,6 +41,12 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+#testing
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
+core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "coreTesting" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 
 #Retrofit
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
@@ -57,6 +69,10 @@ androidx-paging-compose ={ group="androidx.paging", name ="paging-compose", vers
 
 #coil
 coil-compose={group="io.coil-kt", name="coil-compose", version.ref="coil"}
+
+#mockito
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockitoCore" }
+mockito-android = { group = "org.mockito", name = "mockito-android", version.ref = "mockitoAndroid" }
 
 
 [plugins]

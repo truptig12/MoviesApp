@@ -45,6 +45,7 @@ android {
 dependencies {
 
     implementation(project(":movie_features:movie_domain"))
+    implementation(project(":core"))
 
     //=== coil ===
     implementation(libs.coil.compose)
@@ -71,4 +72,16 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation("androidx.palette:palette-ktx:1.0.0")
+
+    //==testing
+    testImplementation(libs.mockito.core)
+    androidTestImplementation(libs.mockito.android)
+    testImplementation(libs.kotlinx.coroutines.test)
+
+    testImplementation(libs.mockk)
+    testImplementation(libs.core.testing)
+    testImplementation(libs.turbine)
+
 }

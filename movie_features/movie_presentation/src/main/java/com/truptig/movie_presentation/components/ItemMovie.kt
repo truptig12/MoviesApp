@@ -38,6 +38,22 @@ fun ItemMovie(
     itemEntity: Movie,
     onClick: () -> Unit
 ) {
+    val posterUrl = itemEntity.Poster
+    val thumbPosterUrl = itemEntity.Poster
+    if (posterUrl != null && thumbPosterUrl != null) {
+        ProgressiveGlowingImage(
+            url = posterUrl,
+            thumbUrl = thumbPosterUrl,
+            glow = true,
+            Modifier.clickable { onClick() })
+    }
+}
+/*
+@Composable
+fun ItemMovie(
+    itemEntity: Movie,
+    onClick: () -> Unit
+) {
     Card(
         modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -116,4 +132,4 @@ fun ItemMovie(
             )
         }
     }
-}
+}*/

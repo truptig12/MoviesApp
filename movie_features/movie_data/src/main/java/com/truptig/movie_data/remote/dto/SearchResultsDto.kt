@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 class SearchResultsDto<T : Any?> {
     @SerializedName("Search")
-    val Search: T? = null
+    var Search: T? = null
 
     @SerializedName("Response")
-    val Response: String? = null
+    var Response: String? = null
 
     @SerializedName("totalResults")
-    val totalResults: String? = null
+    var totalResults: String? = null
 }
