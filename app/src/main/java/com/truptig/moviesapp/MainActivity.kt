@@ -14,6 +14,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.truptig.core.ui.AppRoutes
 import com.truptig.movie_presentation.screens.HomeScreen
 import com.truptig.movie_presentation.screens.MovieScreen
 import com.truptig.movie_presentation.viewmodel.MovieViewModel
@@ -26,22 +27,28 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MoviesAppTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val viewModel: MovieViewModel = hiltViewModel()
-                    val navController = rememberNavController()
-                    NavHost(navController = navController, startDestination = "home") {
-                        composable("home") {
-                            HomeScreen(viewModel,navController)
-                        }
-                        composable("details") {
-                            MovieScreen(viewModel,navController)
-                        }
-                    }
+
+                    StartApp()
                 }
+            }
+        }
+    }
+
+    @Composable
+    private fun StartApp() {
+        val viewModel: MovieViewModel = hiltViewModel()
+        val navController = rememberNavController()
+
+        NavHost(navController = navController, startDestination = AppRoutes.HOME) {
+            composable(AppRoutes.HOME) {
+                HomeScreen(viewModel, navController)
+            }
+            composable(AppRoutes.DETAILS) {
+                MovieScreen(viewModel, navController)
             }
         }
     }

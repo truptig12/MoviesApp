@@ -23,15 +23,6 @@ fun MovieScreen(
     navController: NavHostController
 ) {
 
-  //  val viewModel: MovieViewModel = hiltViewModel()
-    Content(viewModel, navController)
-}
-
-@Composable
-private fun Content(
-    viewModel: MovieViewModel,
-    navController: NavHostController
-) {
     Box(
         modifier = Modifier
             .clip(RoundedCornerShape(7))

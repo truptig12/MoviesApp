@@ -46,8 +46,6 @@ fun HomeScreen(
     viewModel: MovieViewModel,
     navController: NavHostController
 ) {
-
-   // val viewModel: MovieViewModel = hiltViewModel()
     val moviePagingItems: LazyPagingItems<Movie> = viewModel.moviesState.collectAsLazyPagingItems()
     var searchText by remember { mutableStateOf("") }
 
@@ -99,16 +97,6 @@ fun HomeScreen(
 
                         itemEntity = moviePagingItems[index]!!,
                         onClick = {
-                            /*MovieDetailsPopup(
-                            movie =  moviePagingItems[index]!!,
-                            onExpandMovieDetails = { movie ->
-                                onExpandMovieDetails(movie)
-                                coroutineScope.launch {
-                                    delay(300)
-                                    onCloseMovieDetails()
-                                }
-                            }
-                        )*/
                             viewModel.onEvent(HomeEvent.Details(moviePagingItems[index]!!.Title))
                             navController.navigate("details")
                         }
@@ -147,57 +135,6 @@ fun HomeScreen(
                 }
                 item { Spacer(modifier = Modifier.padding(4.dp)) }
             }
-
-           /* LazyColumn(
-                modifier = Modifier
-                    .padding(8.dp)
-                    .background(Color(0xfff9f9f9))
-            ) {
-                item { Spacer(modifier = Modifier.padding(4.dp)) }
-                items(moviePagingItems.itemCount) { index ->
-                    ItemMovie(
-                        itemEntity = moviePagingItems[index]!!,
-                        onClick = {
-                            viewModel.onEvent(HomeEvent.Details(moviePagingItems[index]!!.Title))
-                            navController.navigate("details")
-
-                            //  navController.navigate("details/${moviePagingItems[index]!!.Title}")
-                        }
-                    )
-                }
-                moviePagingItems.apply {
-                    when {
-                        loadState.refresh is LoadState.Loading -> {
-                            item { PageLoader(modifier = Modifier.fillParentMaxSize()) }
-                        }
-
-                        loadState.refresh is LoadState.Error -> {
-                            val error = moviePagingItems.loadState.refresh as LoadState.Error
-                            item {
-                                ErrorMessage(
-                                    modifier = Modifier.fillParentMaxSize(),
-                                    message = error.error.localizedMessage!!,
-                                    onClickRetry = { retry() })
-                            }
-                        }
-
-                        loadState.append is LoadState.Loading -> {
-                            item { LoadingNextPageItem(modifier = Modifier) }
-                        }
-
-                        loadState.append is LoadState.Error -> {
-                            val error = moviePagingItems.loadState.append as LoadState.Error
-                            item {
-                                ErrorMessage(
-                                    modifier = Modifier,
-                                    message = error.error.localizedMessage!!,
-                                    onClickRetry = { retry() })
-                            }
-                        }
-                    }
-                }
-                item { Spacer(modifier = Modifier.padding(4.dp)) }
-            }*/
         }
     }
 }
